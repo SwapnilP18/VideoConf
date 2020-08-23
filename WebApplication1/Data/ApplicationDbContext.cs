@@ -31,11 +31,12 @@ namespace WebApplication1.Data
             base.OnModelCreating(builder);
         }
 
-        public DbSet<Meeting> Meeting { get; set; }
-        public DbSet<Room> Room { get; set; }
-        public DbSet<RoomConfiguration> RoomConfiguration { get; set; }
-        public DbSet<RoomFeatures> RoomFeature { get; set; }
-        public DbSet<RoomSettings> RoomSetting { get; set; }
-        public DbSet<UserRoomMapping> UserRoomMapping { get; set; }
+        public DbSet<User> User { get; set; }
+        public DbSet<Meeting> Meetings { get; set; }
+        public DbSet<Room> Rooms { get; set; }
+        public DbSet<RoomConfiguration> RoomConfigurations { get; set; }
+        public DbSet<RoomFeature> RoomFeatures { get; set; }
+        public DbSet<RoomSetting> RoomSettings { get; set; }
+        public DbSet<UserRoomMapping> UserRoomMappings { get; set; }
     }
 }

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace ConferenceApp.Models
 {
-    public class RoomSettings
+    public class RoomSetting
     {
         public Guid ID { get; set; }
         public Guid TenantID { get; set; }
