@@ -1,15 +1,16 @@
-﻿using System;
+﻿using Finbuckle.MultiTenant;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace ConferenceApp.Models
 {
+    [MultiTenant]
     public class Meeting
     {
         public Guid ID { get; set; }
         public Guid RoomID { get; set; }
-        public Guid TenantID { get; set; }
         public Guid ServerID { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }

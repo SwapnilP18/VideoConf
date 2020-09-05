@@ -13,6 +13,13 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MySql.Data.MySqlClient;
 using MySql.Data;
+using Finbuckle.MultiTenant;
+using System;
+using ConferenceApp.Data;
+using Microsoft.AspNet.OData.Extensions;
+using Microsoft.OData.Edm;
+using Microsoft.AspNet.OData.Builder;
+using ConferenceApp.Models;
 
 namespace WebApplication1
 {
@@ -45,6 +52,8 @@ namespace WebApplication1
             {
                 configuration.RootPath = "ClientApp/dist";
             });
+            services.AddMultiTenant<TenantInfo>().WithConfigurationStore().WithRouteStrategy();
+            services.AddOData();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -70,6 +79,7 @@ namespace WebApplication1
             }
 
             app.UseRouting();
+            app.UseMultiTenant();
 
             app.UseAuthentication();
             app.UseIdentityServer();
@@ -78,8 +88,10 @@ namespace WebApplication1
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller}/{action=Index}/{id?}");
+                    pattern: "{__tenant__=}/{controller}/{action=Index}/{id?}");//{__tenant__}/{controller}/{action=Index}/{id?}");
+                endpoints.Select().Filter().OrderBy().Count().MaxTop(10);
                 endpoints.MapRazorPages();
+                endpoints.MapODataRoute("odata", "odata", GetEdmModel());
             });
 
             app.UseSpa(spa =>
@@ -95,5 +107,20 @@ namespace WebApplication1
                 }
             });
         }
+
+        IEdmModel GetEdmModel()
+        {
+            var odataBuilder = new ODataConventionModelBuilder();
+            odataBuilder.EntitySet<Meeting>("Meetings");
+            odataBuilder.EntitySet<Room>("Rooms");
+            odataBuilder.EntitySet<RoomConfiguration>("RoomConfigurations");
+            odataBuilder.EntitySet<RoomFeature>("RoomFeatures");
+            odataBuilder.EntitySet<RoomSetting>("RoomSettings");
+            odataBuilder.EntitySet<User>("Users");
+            odataBuilder.EntitySet<UserRoomMapping>("UserRoomMappings");
+            odataBuilder.EntitySet<WeatherForecast>("WeatherForecast");
+            return odataBuilder.GetEdmModel();
+        }
+
     }
 }
