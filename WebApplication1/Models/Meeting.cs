@@ -20,5 +20,6 @@ namespace ConferenceApp.Models
         public DateTime CreatedDate { get; set; }
         public DateTime ModifiedDate { get; set; }
         public bool IsDeleted { get; set; }
+        public Room Room { get; set; }
     }
 }

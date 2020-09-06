@@ -10,7 +10,7 @@ namespace ConferenceApp.Models
     public class RoomSetting
     {
         public Guid ID { get; set; }
-        public Guid FeatureID { get; set; }
+        public Guid RoomFeatureID { get; set; }
         public string Value { get; set; }
         public Guid RoomID { get; set; }
         public bool IsActive { get; set; }
@@ -19,6 +19,8 @@ namespace ConferenceApp.Models
         public DateTime CreatedDate { get; set; }
         public DateTime ModifiedDate { get; set; }
         public bool IsDeleted { get; set; }
+        public Room Room { get; set; }
+        public RoomFeature RoomFeature { get; set; }
 
     }
 }

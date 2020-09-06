@@ -15,7 +15,7 @@ using MySql.Data.MySqlClient;
 using MySql.Data;
 using Finbuckle.MultiTenant;
 using System;
-using ConferenceApp.Data;
+//using ConferenceApp.Data;
 using Microsoft.AspNet.OData.Extensions;
 using Microsoft.OData.Edm;
 using Microsoft.AspNet.OData.Builder;
